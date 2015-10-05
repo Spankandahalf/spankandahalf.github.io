@@ -40,9 +40,6 @@
 				var threeQuartTime = totTime - quartTime;  
 				var elapsedTime = parseInt(currentTime.toFixed());
 			
-				if($("#current").text() == 0:00) {
-					ga('send','event','VideoViews','Started viewing');
-				}
 				if(elapsedTime == quartTime && !videoStatus[0]){
 					console.log("Video 25% viewed");
 					ga('send','event','VideoViews','25% viewed');
