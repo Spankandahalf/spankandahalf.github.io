@@ -31,7 +31,7 @@
 			  var secondsCounter = 0.0;
 			  $("#inline-video").on("timeupdate", function(event){
 				  var changeInTime = this.currentTime - secondsCounter;
-				  if(elapsedTime > 0.25 || this.currentTime == this.duration) {
+				  if(changeInTime > 0.25 || this.currentTime == this.duration) {
 					  videoStatus = onTrackedVideoFrame(this.currentTime, this.duration, videoStatus);
 				  }
 				  secondsCounter = this.currentTime;
