@@ -28,8 +28,13 @@
 			  
 			  // videoStatus will be an array of booeans where 0 = 25% reached, 1 = 50%, 2 = 75% & 3 = 100%
 			  var videoStatus = [false, false, false, false];
+			  var secondsCounter = 0.0;
 			  $("#inline-video").on("timeupdate", function(event){
-				  videoStatus = onTrackedVideoFrame(this.currentTime, this.duration, videoStatus);
+				  var elapsedTime = parseInt(currentTime.toFixed());
+				  if(secondsCounter != elapsedTime) {
+					  videoStatus = onTrackedVideoFrame(this.currentTime, this.duration, videoStatus);
+				  }
+				  secondsCounter = elapsedTime;
 				});
 			});
 			
