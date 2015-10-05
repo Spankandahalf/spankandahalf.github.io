@@ -12,9 +12,7 @@
 
 		  ga('create', 'UA-68436781-1', 'auto');
 		  ga('send', 'pageview');
-
 		</script>
-		
 		
 	</head>
 
@@ -27,6 +25,7 @@
 
 		<script>
 			$(document).ready(function(){
+				console.log("This is a test");
 			  // videoStatus will be an array of booeans where 0 = 25% reached, 1 = 50%, 2 = 75% & 3 = 100%
 			  var videoStatus = [false, false, false, false];
 			  $("#inline-video").on("timeupdate", function(event){
