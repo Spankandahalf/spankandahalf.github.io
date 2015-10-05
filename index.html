@@ -30,7 +30,7 @@
 			  var videoStatus = [false, false, false, false];
 			  var secondsCounter = 0.0;
 			  $("#inline-video").on("timeupdate", function(event){
-				  var elapsedTime = parseInt(currentTime.toFixed());
+				  var elapsedTime = parseInt(this.currentTime.toFixed());
 				  if(secondsCounter != elapsedTime) {
 					  videoStatus = onTrackedVideoFrame(this.currentTime, this.duration, videoStatus);
 				  }
