@@ -30,11 +30,11 @@
 			  var videoStatus = [false, false, false, false];
 			  var secondsCounter = 0.0;
 			  $("#inline-video").on("timeupdate", function(event){
-				  var elapsedTime = parseInt(this.currentTime.toFixed());
-				  if(secondsCounter != elapsedTime) {
+				  var changeInTime = this.currentTime - secondsCounter;
+				  if(elapsedTime > 0.5 || this.currentTime == this.duration) {
 					  videoStatus = onTrackedVideoFrame(this.currentTime, this.duration, videoStatus);
 				  }
-				  secondsCounter = elapsedTime;
+				  secondsCounter = this.currentTime;
 				});
 			});
 			
