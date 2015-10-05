@@ -1,0 +1,37 @@
+.container{
+height:200px;
+width:200px;
+}
+
+
+
+
+
+/* IMPORTANT BIT */
+
+.container {
+	background-color:red;
+}
+
+.container.highlight{
+	background-color:blue;
+}
+
+.container .highlight .highlight{
+	background-color:green;
+}
+
+
+/* LESS */
+.container{
+	.highlight{
+		background-color:red;
+	}/* produces    .container .highlight    */
+	
+	&.highlight{
+		background-color:blue;
+	}/* produces     .container.highlight    */
+}
+
+
+
