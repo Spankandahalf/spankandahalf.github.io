@@ -26,7 +26,7 @@
 		<script>
 			$(document).ready(function(){
 			  
-			  // videoStatus will be an array of booeans where 0 = 25% reached, 1 = 50%, 2 = 75% & 3 = 100%
+			  // videoStatus will be an array of booeans where 0 = 25% viewed, 1 = 50%, 2 = 75% & 3 = 100%
 			  var videoStatus = [false, false, false, false];
 			  var secondsCounter = 0.0;
 			  $("#inline-video").on("timeupdate", function(event){
@@ -39,6 +39,7 @@
 			});
 			
 			function onTrackedVideoFrame(currentTime, duration, videoStatus){
+				var url = $("#inline-video").find('source').attr('src');
 				var totTime = parseInt(duration.toFixed());
 				var quartTime = parseInt((totTime / 4).toFixed());
 				var halfTime = parseInt((totTime / 2).toFixed());
@@ -46,23 +47,23 @@
 				var elapsedTime = parseInt(currentTime.toFixed());
 			
 				if(elapsedTime == quartTime && !videoStatus[0]){
-					console.log("Video 25% viewed");
-					ga('send','event','VideoViews','25% viewed');
+					console.log("Video 25% viewed of " + url);
+					ga('send','event','VideoViews','25% viewed of ' + url);
 					videoStatus[0] = true;
 				}
 				if(elapsedTime == halfTime && !videoStatus[1]){
 					console.log("Video 50% viewed");
-					ga('send','event','VideoViews','50% viewed');
+					ga('send','event','VideoViews','50% viewed of ' + url);
 					videoStatus[1] = true;
 				}
 				if(elapsedTime == threeQuartTime && !videoStatus[2]){
 					console.log("Video 75% viewed");
-					ga('send','event','VideoViews','75% viewed');
+					ga('send','event','VideoViews','75% viewed of ' + url);
 					videoStatus[2] = true;
 				}
 				if(currentTime == duration && !videoStatus[3]){
 					console.log("Video 100% viewed");
-					ga('send','event','VideoViews','100% viewed');
+					ga('send','event','VideoViews','100% viewed of ' + url);
 					videoStatus[3] = true;
 				}
 			
