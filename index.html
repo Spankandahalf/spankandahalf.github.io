@@ -49,12 +49,16 @@
 				if(elapsedTime == quartTime && !videoStatus[0]){
 					console.log("Video 25% viewed of " + url);
 					<!-- ga('send', 'event', [eventCategory], [eventAction], [eventLabel], [eventValue], [fieldsObject]); -->
-					ga('send','event', 'Video', 'View', 'Video: ' + url + ' 25% Viewed');
+					ga('send', {
+					  hitType: 'event',
+					  eventCategory: 'Video',
+					  eventAction: 'View',
+					  eventLabel: 'Video: ' + url +' 25% Viewed'
+					});
 					videoStatus[0] = true;
 				}
 				if(elapsedTime == halfTime && !videoStatus[1]){
 					console.log("Video 50% viewed");
-					<!-- ga('send','event','VideoViews','50% viewed of ' + url); -->
 					ga('send', {
 					  hitType: 'event',
 					  eventCategory: 'Video',
@@ -65,7 +69,6 @@
 				}
 				if(elapsedTime == threeQuartTime && !videoStatus[2]){
 					console.log("Video 75% viewed");
-					<!-- ga('send','event','VideoViews','75% viewed of ' + url); -->
 					ga('send', {
 					  hitType: 'event',
 					  eventCategory: 'Video',
@@ -76,7 +79,12 @@
 				}
 				if(currentTime == duration && !videoStatus[3]){
 					console.log("Video 100% viewed");
-					ga('send','event','VideoViews','100% viewed of ' + url);
+					ga('send', {
+					  hitType: 'event',
+					  eventCategory: 'Video',
+					  eventAction: 'View',
+					  eventLabel: 'Video: ' + url +' 100% Viewed'
+					});
 					videoStatus[3] = true;
 				}
 			
