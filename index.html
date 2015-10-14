@@ -66,7 +66,14 @@
 				}
 				if(elapsedTime == threeQuartTime && !videoStatus[2]){
 					console.log("Video 75% viewed");
-					ga('send','event','VideoViews','75% viewed of ' + url);
+					<!-- ga('send','event','VideoViews','75% viewed of ' + url); -->
+					ga('send', {
+					  hitType: 'event',
+					  eventCategory: 'Video',
+					  eventAction: 'View',
+					  eventLabel: 'Video: ' + url,
+					  eventValue: 75
+					});
 					videoStatus[2] = true;
 				}
 				if(currentTime == duration && !videoStatus[3]){
