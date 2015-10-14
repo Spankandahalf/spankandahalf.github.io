@@ -54,7 +54,14 @@
 				}
 				if(elapsedTime == halfTime && !videoStatus[1]){
 					console.log("Video 50% viewed");
-					ga('send','event','VideoViews','50% viewed of ' + url);
+					<!-- ga('send','event','VideoViews','50% viewed of ' + url); -->
+					ga('send', {
+					  hitType: 'event',
+					  eventCategory: 'Video',
+					  eventAction: 'View',
+					  eventLabel: 'Video: ' + url,
+					  eventValue: 50
+					});
 					videoStatus[1] = true;
 				}
 				if(elapsedTime == threeQuartTime && !videoStatus[2]){
