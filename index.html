@@ -48,7 +48,8 @@
 			
 				if(elapsedTime == quartTime && !videoStatus[0]){
 					console.log("Video 25% viewed of " + url);
-					ga('send','event','VideoViews','25% viewed of ' + url);
+					<!-- ga('send', 'event', [eventCategory], [eventAction], [eventLabel], [eventValue], [fieldsObject]); -->
+					ga('send','event', 'Video', 'View', 'Video: ' + url, 25);
 					videoStatus[0] = true;
 				}
 				if(elapsedTime == halfTime && !videoStatus[1]){
