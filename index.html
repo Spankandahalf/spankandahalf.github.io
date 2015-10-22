@@ -29,25 +29,27 @@
 			  // videoStatus will be an array of booeans where 0 = 25% viewed, 1 = 50%, 2 = 75% & 3 = 100%
 			  var videoStatus = [false, false, false, false];
 			  var secondsCounter = 0.0;
-			  $("#inline-video").on("timeupdate", function(event){
+			  $("video").on("timeupdate", function(event){
+					var url = $(this).find('source').attr('src');
 					if(!videoPlayed) {
 						ga('send', {
 						  hitType: 'event',
 						  eventCategory: 'Video',
-						  eventAction: 'Play'
+						  eventAction: 'Play',
+						  eventLabel: 'Video: ' + url
 						});
 						videoPlayed = true;
 					}
 					var changeInTime = this.currentTime - secondsCounter;
 					if(changeInTime > 0.25 || this.currentTime == this.duration) {
-						videoStatus = onTrackedVideoFrame(this.currentTime, this.duration, videoStatus);
+						videoStatus = onTrackedVideoFrame(this, this.currentTime, this.duration, videoStatus);
 					}
 					  secondsCounter = this.currentTime;
 				});
 			});
 			
-			function onTrackedVideoFrame(currentTime, duration, videoStatus){
-				var url = $("#inline-video").find('source').attr('src');
+			function onTrackedVideoFrame(video, currentTime, duration, videoStatus){
+				var url = $(video).find('source').attr('src');
 				var totTime = parseInt(duration.toFixed());
 				var quartTime = parseInt((totTime / 4).toFixed());
 				var halfTime = parseInt((totTime / 2).toFixed());
