@@ -30,11 +30,19 @@
 			  var videoStatus = [false, false, false, false];
 			  var secondsCounter = 0.0;
 			  $("#inline-video").on("timeupdate", function(event){
-				  var changeInTime = this.currentTime - secondsCounter;
-				  if(changeInTime > 0.25 || this.currentTime == this.duration) {
-					  videoStatus = onTrackedVideoFrame(this.currentTime, this.duration, videoStatus);
-				  }
-				  secondsCounter = this.currentTime;
+					if(!videoPlayed) {
+						ga('send', {
+						  hitType: 'event',
+						  eventCategory: 'Video',
+						  eventAction: 'Play'
+						});
+						videoPlayed = true;
+					}
+					var changeInTime = this.currentTime - secondsCounter;
+					if(changeInTime > 0.25 || this.currentTime == this.duration) {
+						videoStatus = onTrackedVideoFrame(this.currentTime, this.duration, videoStatus);
+					}
+					  secondsCounter = this.currentTime;
 				});
 			});
 			
@@ -46,14 +54,6 @@
 				var threeQuartTime = totTime - quartTime;  
 				var elapsedTime = parseInt(currentTime.toFixed());
 			
-				if(!videoPlayed && elapsedTime > 0.0) {
-					ga('send', {
-					  hitType: 'event',
-					  eventCategory: 'Video',
-					  eventAction: 'Play'
-					});
-					videoPlayed = true;
-				}
 				if(elapsedTime == quartTime && !videoStatus[0]){
 					<!-- ga('send', 'event', [eventCategory], [eventAction], [eventLabel], [eventValue], [fieldsObject]); -->
 					ga('send', {
