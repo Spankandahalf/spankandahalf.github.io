@@ -30,14 +30,6 @@
 			  var videoStatus = [false, false, false, false];
 			  var secondsCounter = 0.0;
 			  $("#inline-video").on("timeupdate", function(event){
-				  if(!videoPlayed) {
-					ga('send', {
-					  hitType: 'event',
-					  eventCategory: 'Video',
-					  eventAction: 'Play'
-					});
-					videoPlayed = true;
-				  }
 				  var changeInTime = this.currentTime - secondsCounter;
 				  if(changeInTime > 0.25 || this.currentTime == this.duration) {
 					  videoStatus = onTrackedVideoFrame(this.currentTime, this.duration, videoStatus);
@@ -54,8 +46,15 @@
 				var threeQuartTime = totTime - quartTime;  
 				var elapsedTime = parseInt(currentTime.toFixed());
 			
+				if(!videoPlayed && elapsedTime > 0.0) {
+					ga('send', {
+					  hitType: 'event',
+					  eventCategory: 'Video',
+					  eventAction: 'Play'
+					});
+					videoPlayed = true;
+				}
 				if(elapsedTime == quartTime && !videoStatus[0]){
-					console.log("Video 25% viewed of " + url);
 					<!-- ga('send', 'event', [eventCategory], [eventAction], [eventLabel], [eventValue], [fieldsObject]); -->
 					ga('send', {
 					  hitType: 'event',
@@ -66,7 +65,6 @@
 					videoStatus[0] = true;
 				}
 				if(elapsedTime == halfTime && !videoStatus[1]){
-					console.log("Video 50% viewed");
 					ga('send', {
 					  hitType: 'event',
 					  eventCategory: 'Video',
@@ -76,7 +74,6 @@
 					videoStatus[1] = true;
 				}
 				if(elapsedTime == threeQuartTime && !videoStatus[2]){
-					console.log("Video 75% viewed");
 					ga('send', {
 					  hitType: 'event',
 					  eventCategory: 'Video',
@@ -86,7 +83,6 @@
 					videoStatus[2] = true;
 				}
 				if(currentTime == duration && !videoStatus[3]){
-					console.log("Video 100% viewed");
 					ga('send', {
 					  hitType: 'event',
 					  eventCategory: 'Video',
@@ -96,11 +92,7 @@
 					videoStatus[3] = true;
 				}
 			
-				$("#current").text(currentTime);
-				$("#duration").text(duration);
-				
 				return videoStatus;
-				
 			}
 		</script>
 
